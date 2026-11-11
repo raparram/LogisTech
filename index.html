@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LogisTech · Hoja de trabajo 11 · Plataforma elegida, no impuesta</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23000'/><path d='M7 9Q32 1 57 9v39q0 8-10 11-10 4-15 4-8 0-15-3Q7 57 7 48z' fill='%23FFF20D'/><path d='M21 49Q24 15 31 7q5 2 9 21 5 24 0 31-3 4-4 5h-6q-1-4 2-7 5-6 1-28-2-13-3-14-3 6-7 34-1 4-2 0z' fill='%23000'/></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F1EE; --card:#FFFFFF; --soft:#E7E5DF;
+  --ink:#1F2328; --muted:#5F6368; --line:#CFCBC2;
+  --accent:#B23A48; --accent2:#2F7A5B; --ochre:#B07A16;
+  --code:#1F2328;
+  --content-max:1800px;
+  --page-gutter:clamp(20px,4vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{
+  background-color:var(--paper);
+  background-image:radial-gradient(rgba(31,35,40,.075) 1px, transparent 1px);
+  background-size:22px 22px;
+  color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;line-height:1.62;font-size:1.02rem
+}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:11;transition:width .2s}
+.container{max-width:calc(var(--content-max) + 2 * var(--page-gutter));margin:0 auto;padding:0 var(--page-gutter)}
+
+/* ---------- secciones ---------- */
+main{position:relative;z-index:1}
+section.s{position:relative;min-height:100vh;padding:10vh var(--page-gutter);display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--line)}
+section.s > *{width:100%;min-width:0;margin-left:auto;margin-right:auto;max-width:var(--content-max)}
+section.s.hero{min-height:92vh}
+section.s.hero h1{text-align:center}
+section.s.hero h1 .acc{display:inline-block;max-width:100%}
+section.s.hero > .kicker{text-align:center;justify-content:center}
+section.s.hero > .muted{text-align:center;max-width:100ch}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.sec{display:inline-block;font-family:'Source Serif 4',Georgia,serif;font-weight:700;color:var(--paper);background:var(--accent);padding:.02rem .55rem;border-radius:2px;font-size:.95rem;letter-spacing:0}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif}
+h1{font-weight:800;line-height:1.02;font-size:clamp(2.5rem,6.4vw,4.9rem);margin-bottom:1.1rem;letter-spacing:-.02em}
+h2{font-weight:700;line-height:1.1;font-size:clamp(1.65rem,3.4vw,2.55rem);margin-bottom:1.4rem;letter-spacing:-.01em}
+h3{font-weight:700;font-size:1.1rem;color:var(--ink);margin-bottom:.4rem}
+.strike{color:var(--muted);text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--accent)}
+.acc{color:var(--accent);box-shadow:inset 0 -.18em 0 rgba(178,58,72,.18)}
+p,li{font-size:1.02rem}
+.muted{color:var(--muted)}
+a{color:var(--accent2)}
+
+/* ---------- componentes ---------- */
+.grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));align-items:stretch}
+.grid > *{min-width:0}
+.card{height:100%;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1.2rem 1.3rem;box-shadow:3px 3px 0 var(--line)}
+.card.accent{border-left:4px solid var(--accent2)}
+.card.warn{border-left:4px solid var(--accent)}
+.card.gold{border-left:4px solid var(--ochre)}
+.grid > .card{display:flex;flex-direction:column}
+.grid > .card h3{min-height:2.65em;display:flex;align-items:flex-end}
+.card p + p{margin-top:.6rem}
+.callout{border-left:4px solid var(--accent);background:var(--soft);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin-top:1.2rem}
+.callout.g{border-left-color:var(--accent2)}
+.callout.o{border-left-color:var(--ochre)}
+.callout h3{margin-bottom:.3rem}
+code{font-family:'JetBrains Mono',monospace;font-size:.88em;background:var(--soft);padding:.05rem .35rem;border-radius:2px}
+td code{overflow-wrap:anywhere}
+.tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.12rem .55rem;border-radius:2px;border:1px solid var(--ink);color:var(--ink);margin:0 .4rem .4rem 0;letter-spacing:.03em}
+.tag.amber{border-color:var(--ochre);color:var(--ochre)}
+.tag.red{border-color:var(--accent);color:var(--accent)}
+.tag.green{border-color:var(--accent2);color:var(--accent2)}
+ul.clean{list-style:none}
+ul.clean li{padding-left:1.4rem;position:relative;margin-bottom:.55rem}
+ul.clean li:before{content:"";position:absolute;left:0;top:.62em;width:.5rem;height:.5rem;background:var(--accent)}
+ul.check{list-style:none;margin:1rem 0}
+ul.check li{position:relative;padding:.5rem 0 .5rem 1.8rem;border-bottom:1px solid var(--line)}
+ul.check li:before{content:"✓";position:absolute;left:0;color:var(--accent2);font-weight:700}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:3px 3px 0 var(--line)}
+table{width:100%;border-collapse:collapse;font-size:.94rem;background:var(--card)}
+th,td{text-align:left;padding:.65rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:'JetBrains Mono',monospace;font-weight:500;color:var(--muted);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-bottom:2px solid var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+tfoot td{border-top:2px solid var(--ink);background:var(--soft)}
+.fid{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:.78rem;color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:0 .35rem;margin-right:.35rem}
+figure{margin:1.2rem 0}
+figure > svg{width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:3px 3px 0 var(--line)}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:.7rem}
+figcaption b{color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:500}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;margin:.6rem 0 1rem;align-items:center}
+.btn{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:.48rem 1rem;border-radius:2px;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.8rem;transition:.15s;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--soft)}
+.index a{display:flex;gap:1rem;align-items:baseline;padding:.85rem 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.index a:hover h3{color:var(--accent)}
+.index .n{font-family:'Source Serif 4',Georgia,serif;font-weight:800;color:var(--accent);width:3.4rem;font-size:1.4rem;flex:none}
+.count{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:.8rem 1.4rem;margin-top:2.2rem;width:100%;max-width:920px}
+.meta div{border-top:1px solid var(--ink);padding-top:.5rem}
+.meta span{display:block;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.meta .team-meta{grid-column:1/-1}
+.team-names{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px;margin-top:6px}
+.team-names b{display:block;font-weight:400}
+.compare-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.three-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.four-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* pasos numerados */
+.equipo-steps{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.5rem}
+.equipo-steps li{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--accent2);padding:1rem 1.1rem;line-height:1.5}
+.equipo-steps b{display:block;font-family:'Source Serif 4',Georgia,serif;font-size:1.15rem;margin-bottom:.4rem}
+.scenario-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:1rem;counter-reset:scenario}
+.scenario-step{counter-increment:scenario;position:relative;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ink);border-radius:4px;padding:1rem;box-shadow:3px 3px 0 var(--line)}
+.scenario-step::before{content:counter(scenario);display:grid;place-items:center;width:1.55rem;height:1.55rem;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-size:.75rem;margin-bottom:.65rem}
+.scenario-step.auto{border-top-color:var(--accent2)}
+.scenario-step.auto::before{background:var(--accent2)}
+.scenario-step h3{font-size:1.05rem;margin-bottom:.45rem}
+.scenario-step p{font-size:.9rem;color:var(--muted)}
+.scenario-checks{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.55rem}
+.guard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+.guard-card{display:grid;grid-template-columns:2.2rem minmax(0,1fr);gap:.8rem;background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1rem;box-shadow:3px 3px 0 var(--line)}
+.guard-number{display:grid;place-items:center;width:2rem;height:2rem;background:var(--ink);color:var(--paper);font-family:'JetBrains Mono',monospace;font-weight:500}
+.guard-card h3{font-size:1.05rem;margin-bottom:.35rem}
+.guard-card p{font-size:.9rem;color:var(--muted)}
+
+/* rutas de alertas */
+.route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.1rem}
+.route{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ink);border-radius:4px;padding:1rem 1.1rem;box-shadow:3px 3px 0 var(--line);display:flex;flex-direction:column}
+.route .lbl{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.route h3{margin:.35rem 0 .3rem;font-size:1.05rem}
+.route p{font-size:.92rem}
+.route .to{margin-top:auto;padding-top:.8rem;border-top:1px solid var(--line);font-size:.9rem}
+.route .to b{color:var(--accent2)}
+.route.platform{border-top-color:var(--ochre)} .route.platform .to b{color:var(--ochre)}
+.route.consumer{border-top-color:var(--accent2)}
+.route.owner{border-top-color:var(--accent)} .route.owner .to b{color:var(--accent)}
+
+/* plan en tres pasos con fechas en su propio carril */
+.timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1.2rem}
+.tl-step{background:var(--card);border:1px solid var(--line);border-radius:4px;box-shadow:3px 3px 0 var(--line);display:flex;flex-direction:column}
+.tl-head{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-bottom:1px solid var(--line)}
+.tl-num{display:grid;place-items:center;flex:none;width:2rem;height:2rem;background:var(--accent2);color:#fff;font-family:'JetBrains Mono',monospace;font-weight:500}
+.tl-when{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.tl-body{padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.tl-body h3{font-size:1.15rem;margin:0}
+.tl-body ul{margin-top:.2rem}
+.tl-body li{font-size:.94rem}
+.tl-exit{margin-top:auto;padding:.7rem 1.1rem;background:var(--soft);font-size:.9rem;border-top:1px solid var(--line)}
+.tl-exit strong{display:block;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);font-weight:500}
+
+/* comunicado oficial */
+.memo{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ochre);border-radius:4px;box-shadow:3px 3px 0 var(--line);padding:1.4rem 1.6rem;margin-top:1rem}
+.memo-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem 1rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-bottom:.8rem;margin-bottom:1rem;border-bottom:1px solid var(--line)}
+.memo h3{font-size:1.3rem;margin-bottom:.8rem}
+.memo p{font-size:1.04rem;line-height:1.7}
+.memo p + p{margin-top:.9rem}
+.memo-sign{margin-top:1rem;font-size:.92rem;color:var(--muted)}
+
+/* simulador de portada */
+.sim{margin:1.8rem 0 0;border:1.5px solid var(--ink);border-radius:4px;background:var(--card);padding:1.1rem 1.2rem 1.2rem;box-shadow:3px 3px 0 var(--line)}
+.sim-ctl{display:grid;grid-template-columns:repeat(3,minmax(0,210px)) minmax(0,1fr);gap:.5rem;align-items:center;margin-bottom:.7rem}
+.sim-hint{font-family:'JetBrains Mono',monospace;font-size:.74rem;line-height:1.45;color:var(--muted)}
+.sb{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:2px;padding:.48rem .8rem;cursor:pointer;transition:.15s;width:100%}
+.sb:hover{background:var(--soft)}
+.sb.pri{background:var(--ink);color:var(--paper)}
+.sb.pri:hover{background:var(--accent2);border-color:var(--accent2)}
+.sb.warn{border-color:var(--accent);color:var(--accent)}
+.sb.warn:hover{background:var(--accent);color:#fff}
+.sb.gold{border-color:var(--ochre);color:var(--ochre)}
+.sb.gold:hover{background:var(--ochre);color:#fff}
+.sb:focus-visible{outline:2px solid var(--ochre);outline-offset:3px}
+.sim-svg{width:100%;height:auto;display:block}
+.sim-svg text{font-family:'JetBrains Mono',monospace;text-anchor:middle;fill:var(--ink)}
+.sim-svg .hd{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:15px}
+.sim-svg .t2{font-size:11px;fill:var(--muted)}
+.sim-svg .t3{font-size:10.5px;fill:var(--muted)}
+.sim-svg .zl{font-size:10.5px;letter-spacing:.12em;text-anchor:start;fill:var(--muted)}
+.sim-svg .zl.o{fill:var(--ochre)}
+.nd .body{fill:var(--card);stroke:var(--line);stroke-width:2;transition:stroke .3s,fill .3s}
+.nd.cp .body{stroke:#D9C49A;stroke-dasharray:6 4}
+.nd.ok .body{stroke:var(--accent2)}
+.nd.on .body{stroke:var(--ink)}
+.nd.bad .body{stroke:var(--accent);fill:#F7E4E6;stroke-dasharray:none}
+.ring{fill:none;stroke:var(--ochre);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center}
+.nd.on .ring{animation:ringp 1.3s ease-out infinite}
+.nd.bad .ring{stroke:var(--accent);animation:ringp 1.3s ease-out infinite}
+@keyframes ringp{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.06)}}
+.rt{fill:none;stroke:var(--line);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.rt.on{stroke:var(--accent2);stroke-dasharray:12 8;animation:flow .6s linear infinite}
+.rt.gold{stroke:var(--ochre);stroke-dasharray:12 8;animation:flow .6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-20}}
+.lk{fill:none;stroke:#C9B78F;stroke-width:2;stroke-dasharray:4 4;transition:stroke .3s,opacity .3s}
+.lk.off{stroke:var(--accent);opacity:.45}
+#pkt rect{fill:var(--ink)}
+#pkt text{fill:#fff;font-size:11px;font-weight:700}
+#pkt.gold rect{fill:var(--ochre)}
+#downText{fill:var(--accent);font-size:11.5px;font-weight:600;text-anchor:start}
+#cntText{font-size:10.5px;fill:var(--muted);text-anchor:start}
+.sim-steps{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr));gap:.5rem;margin-top:.9rem}
+.sim-steps li{font-size:.82rem;line-height:1.35;border-top:3px solid var(--line);padding-top:.4rem;color:var(--muted);transition:.25s}
+.sim-steps li.done{border-top-color:var(--accent2);color:var(--ink)}
+.sim-steps li.cur{border-top-color:var(--accent);color:var(--ink);font-weight:500}
+
+/* lectura por capas */
+.reading-controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:1rem 0;padding:1rem 1.2rem;background:var(--soft);border-radius:4px}
+.reading-controls[hidden]{display:none}
+.reading-controls p{font-size:.95rem;color:var(--muted)}
+.reading-controls .btn{background:var(--card);white-space:normal}
+.summary-grid{margin-top:1.4rem}
+.brief-line{margin-top:1.2rem;padding:.9rem 1.1rem;border-left:4px solid var(--accent);background:var(--soft)}
+.content-details{margin-top:1rem;padding:1rem 1.2rem;background:var(--card);border:1px solid var(--line);border-radius:4px}
+.content-details > summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:1.08rem}
+.content-details > summary::marker{color:var(--accent)}
+.content-details > summary:focus-visible,.reading-controls .btn:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
+.content-details[open] > summary{padding-bottom:.8rem;margin-bottom:1rem;border-bottom:1px solid var(--line)}
+.content-details .tw{margin-top:.8rem}
+.equipo-details{margin-top:1.5rem;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem}
+.equipo-details summary{cursor:pointer;font-weight:600;color:var(--accent2)}
+.equipo-details p{margin-top:.8rem}
+
+/* visor de diagramas */
+.diagram-viewer-toolbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
+.diagram-viewer-toolbar button{border:1px solid var(--line);background:var(--card);border-radius:4px;padding:6px 12px;font-weight:600;font-size:13px;cursor:pointer;font-family:'Source Sans 3',sans-serif;color:var(--ink)}
+.diagram-viewer-toolbar button:hover{border-color:var(--accent);color:var(--accent)}
+.diagram-viewer-stage{position:relative;background:#fff;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:4px;overflow:hidden;cursor:grab;touch-action:pan-y;box-shadow:3px 3px 0 var(--line)}
+.diagram-viewer-stage.grabbing{cursor:grabbing}
+.diagram-viewer-stage > svg{position:absolute;top:0;left:0;transform-origin:0 0;width:auto !important;height:auto !important;max-width:none;user-select:none;border:none !important}
+.table-hint{display:none}
+
+@media (max-width:900px){section.s{padding:9vh var(--page-gutter)}}
+@media (max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  .sim-ctl{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .compare-grid,.three-grid,.four-grid,.scenario-flow,.guard-grid,.route-grid,.timeline,.equipo-steps{grid-template-columns:minmax(0,1fr)}
+  .grid > .card h3{min-height:0}
+}
+@media (max-width:600px){
+  .team-names{grid-template-columns:1fr}
+  th,td{padding:.55rem;font-size:.86rem}
+  .wide-table{min-width:640px}
+  .table-hint{display:block;font-size:.85rem;color:var(--muted);margin-top:.6rem}
+  .memo{padding:1.1rem}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+@media print{
+  @page{size:A4;margin:16mm}
+  body{background:#fff;font-size:10pt;color:#1F2328}
+  #bg,.bar,.diagram-viewer-toolbar,.reading-controls,.sim-ctl{display:none !important}
+  section.s,section.s.hero{display:block;min-height:0;padding:0 0 8mm;break-before:page}
+  section.s:first-child{break-before:auto}
+  section.s > *{max-width:none}
+  h1{font-size:30pt}h2{font-size:21pt}h3{font-size:12pt;break-after:avoid}
+  p,li{font-size:10pt}table{font-size:9pt}th{font-size:8pt}
+  .tw{overflow:visible;box-shadow:none}thead{display:table-header-group}
+  tr,.card,.callout,li,.memo,.route,.tl-step{break-inside:avoid}
+  .card,.memo,.route,.tl-step,.scenario-step,.guard-card{box-shadow:none}
+  .diagram-viewer-stage{height:auto !important;aspect-ratio:auto !important;overflow:visible;box-shadow:none;border:0}
+  .diagram-viewer-stage > svg{position:static !important;width:100% !important;height:auto !important;transform:none !important}
+  figure{break-inside:avoid}
+  details > *{display:block !important}
+  .content-details{padding:0;border:0;background:none}
+  .content-details > summary{display:none !important}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="bar" id="bar"></div>
+
+<main>
+
+<!-- PORTADA -->
+<section class="s hero" id="inicio">
+  <div class="kicker">ARTI-4219 Arquitectura de Plataformas · Hoja de trabajo 11</div>
+  <h1>LogisTech:<br>de <span class="strike">plataforma impuesta</span> a <span class="acc">plataforma elegida</span></h1>
+  <p class="muted">Modelo operativo de la IDP: liderazgo Two-in-a-Box, curación 80/20, entrega fuera de la ruta crítica, InnerSourcing con un solo dueño por activo y retiro de Jenkins por adopción pull.</p>
+
+  <div class="sim" id="sim">
+    <div class="sim-ctl">
+      <button class="sb pri" id="simPath" type="button">▶ Ruta pavimentada</button>
+      <button class="sb warn" id="simDown" type="button">✕ Caída del portal</button>
+      <button class="sb gold" id="simData" type="button">⚑ Ruta propia de datos</button>
+      <span class="sim-hint" id="simHint">La plataforma acelera la entrega, pero no está en su ruta crítica.</span>
+    </div>
+    <svg class="sim-svg" viewBox="0 0 1000 310" role="img" aria-label="Simulación: un despliegue recorre repositorio, CI con políticas, registro y producción; si el portal y la API de plataforma caen, el despliegue continúa">
+      <text class="zl o" x="20" y="38">PLANO DE CONTROL</text>
+      <text class="zl o" x="20" y="56">acelera · no bloquea</text>
+      <text class="zl" x="20" y="112">RUTA CRÍTICA DE ENTREGA</text>
+
+      <path class="lk" id="lkPortal" d="M370 82V124"/>
+      <path class="lk" id="lkApi" d="M620 82V124"/>
+      <path class="rt" id="rRepo" d="M220 169H270"/>
+      <path class="rt" id="rCi" d="M470 169H520"/>
+      <path class="rt" id="rReg" d="M720 169H770"/>
+      <path class="rt" id="rData" d="M220 272H370V214"/>
+
+      <g class="nd cp" id="n-portal"><rect class="ring" x="270" y="22" width="200" height="60" rx="3"/><rect class="body" x="270" y="22" width="200" height="60" rx="3"/><text class="hd" x="370" y="48">Portal Backstage</text><text class="t3" id="portalSt" x="370" y="68">catálogo y templates</text></g>
+      <g class="nd cp" id="n-api"><rect class="ring" x="520" y="22" width="200" height="60" rx="3"/><rect class="body" x="520" y="22" width="200" height="60" rx="3"/><text class="hd" x="620" y="48">API de plataforma</text><text class="t3" id="apiSt" x="620" y="68">escribe PR en Git</text></g>
+      <text id="downText" x="742" y="46" style="opacity:0">PORTAL Y API CAÍDOS</text>
+      <text id="downText2" x="742" y="64" style="opacity:0;fill:var(--muted);font-size:10.5px;text-anchor:start">la entrega continúa</text>
+
+      <g class="nd" id="n-repo"><rect class="ring" x="20" y="124" width="200" height="90" rx="3"/><rect class="body" x="20" y="124" width="200" height="90" rx="3"/><text class="hd" x="120" y="154">Repo del equipo</text><text class="t2" x="120" y="177">pipeline propio</text><text class="t3" x="120" y="197">biblioteca CI fijada</text></g>
+      <g class="nd" id="n-ci"><rect class="ring" x="270" y="124" width="200" height="90" rx="3"/><rect class="body" x="270" y="124" width="200" height="90" rx="3"/><text class="hd" x="370" y="154">CI + políticas</text><text class="t2" x="370" y="177">pruebas · OPA</text><text class="t3" id="ciSt" x="370" y="197">firma la imagen</text></g>
+      <g class="nd" id="n-reg"><rect class="ring" x="520" y="124" width="200" height="90" rx="3"/><rect class="body" x="520" y="124" width="200" height="90" rx="3"/><text class="hd" x="620" y="154">Registro + Git</text><text class="t2" x="620" y="177">imagen firmada</text><text class="t3" x="620" y="197">versión deseada</text></g>
+      <g class="nd" id="n-prod"><rect class="ring" x="770" y="124" width="210" height="90" rx="3"/><rect class="body" x="770" y="124" width="210" height="90" rx="3"/><text class="hd" x="875" y="154">Producción</text><text class="t2" x="875" y="177">Argo CD local</text><text class="t3" x="875" y="197">admisión verifica firma</text></g>
+      <g class="nd" id="n-data"><rect class="ring" x="20" y="244" width="200" height="56" rx="3"/><rect class="body" x="20" y="244" width="200" height="56" rx="3"/><text class="hd" x="120" y="268">Equipo de datos</text><text class="t3" x="120" y="287">ruta propia · mismos mínimos</text></g>
+      <text id="cntText" x="520" y="262">despliegues: 0 · durante la caída: 0</text>
+      <text id="cntText2" x="520" y="282" style="font-size:10.5px;fill:var(--muted);text-anchor:start">bloqueados por la plataforma: 0</text>
+      <g id="pkt" style="opacity:0"><rect x="-36" y="-12" width="72" height="24" rx="2"/><text id="pktTxt" y="4">v1.4.0</text></g>
+    </svg>
+    <ol class="sim-steps" id="simSteps">
+      <li>Commit en el repo</li>
+      <li>Pipeline del equipo</li>
+      <li>Controles como código</li>
+      <li>Artefacto firmado</li>
+      <li>Producción</li>
+    </ol>
+  </div>
+  <p class="muted" style="font-size:.9rem;margin-top:.6rem">Simulación conceptual. La arquitectura detallada y la matriz de fallos se presentan en el bloque II.</p>
+
+  <div class="meta">
+    <div><span>Programa</span>Maestría en Arquitecturas de TI · Uniandes</div>
+    <div><span>Periodo</span>2026-20</div>
+    <div><span>Marco</span>Plataforma como producto · Two-in-a-Box · Madurez CNCF</div>
+    <div class="team-meta"><span>Equipo</span><div class="team-names" style="border:0;padding:0"><div style="border:0;padding:0"><b>Daniel Rubio Sierra</b><b>Diego Latorre Carrasquilla</b><b>Andrés Felipe Suárez Moscoso</b></div><div style="border:0;padding:0"><b>Maycol Alejandro Yate Estupiñán</b><b>Rubén Antonio Parra Medrano</b></div></div></div>
+  </div>
+</section>
+
+<!-- CONTENIDO -->
+<section class="s" id="contenido">
+  <div class="kicker">Contenido</div>
+  <h2>Decisiones del comité</h2>
+  <div class="grid three-grid" style="margin-bottom:1.6rem">
+    <div class="card accent"><h3>Producto curado</h3><p>Una dupla PPM–TL y dos golden paths oficiales: Node.js y PostgreSQL.</p></div>
+    <div class="card accent"><h3>Entrega autónoma</h3><p>Pipeline en el repositorio y Argo CD en cada clúster: si el portal cae, se sigue desplegando.</p></div>
+    <div class="card accent"><h3>Comunidad con dueños</h3><p>Quien aporta un template lo mantiene y atiende su guardia. Jenkins sale por atracción.</p></div>
+  </div>
+  <p style="margin-bottom:1rem">Metas del trimestre: 80 % de los equipos en un golden path por elección, cero despliegues bloqueados por el plano de control y el 30 % de Jenkins liberado.</p>
+  <div class="reading-controls" hidden>
+    <p id="reading-status" aria-live="polite">Vista de síntesis · Despliega cada apartado para consultar su fundamento.</p>
+    <button type="button" class="btn" id="reading-toggle" aria-expanded="false">Mostrar análisis completo</button>
+  </div>
+  <div class="index">
+    <a href="#i"><span class="n">I</span><div><h3>Two-in-a-Box y curación 80/20</h3><p class="muted">Fronteras de decisión, dos golden paths y política para casos atípicos</p></div></a>
+    <a href="#ii"><span class="n">II</span><div><h3>Arquitectura fuera de la ruta crítica</h3><p class="muted">Mecanismo de contingencia, matriz de fallos y verificación</p></div></a>
+    <a href="#iii"><span class="n">III</span><div><h3>InnerSourcing, adopción pull y deuda técnica</h3><p class="muted">Template React con propiedad explícita y retiro de Jenkins en tres pasos</p></div></a>
+    <a href="#cierre"><span class="n">→</span><div><h3>Cierre del comité</h3><p class="muted">Hoja de ruta, métricas, madurez, riesgos y supuestos</p></div></a>
+  </div>
+</section>
+
+<!-- I · TWO-IN-A-BOX Y 80/20 -->
+<section class="s" id="i">
+  <div class="kicker"><span class="sec">I</span>Two-in-a-Box y curación estratégica 80/20</div>
+  <h2>Dos líderes, dos caminos y una salida sin castigo</h2>
+  <p>El equipo de plataforma, solo de ingenieros, atiende cada caso particular de los 30 equipos como una mesa de servicios. El comité lo convierte en un producto con opiniones explícitas sobre qué entra y qué queda fuera.</p>
+  <div class="grid three-grid summary-grid">
+    <div class="card accent"><h3>El PPM decide qué</h3><p>Viabilidad y deseabilidad: problemas, roadmap, curación y políticas.</p></div>
+    <div class="card accent"><h3>El TL decide cómo</h3><p>Factibilidad: arquitectura, confiabilidad, SLO y políticas como código.</p></div>
+    <div class="card gold"><h3>Dos golden paths cubren el 80 %</h3><p>Node.js y PostgreSQL: 24 de 30 equipos usan al menos uno.</p></div>
+  </div>
+  <p class="brief-line"><strong>Decisión de curación:</strong> se pavimenta lo que ya tiene tráfico. Java, React, datos y Jenkins se atienden con primitivas, contribución, ruta propia o retiro, no con soporte a medida.</p>
+
+  <details class="content-details"><summary>Ver los roles y las fronteras de decisión de la dupla</summary>
+  <h3 id="roles" style="margin-top:1.5rem">1.1 Definición de roles Two-in-a-Box</h3>
+  <div class="grid compare-grid">
+    <div class="card gold">
+      <span class="tag amber">Producto · viabilidad y deseabilidad</span>
+      <h3>Platform Product Manager (PPM)</h3>
+      <p><b>Quién:</b> un líder de un equipo consumidor con experiencia en producto y uso real de la IDP; si no existe el perfil, se contrata. No se renombra a un gerente de proyectos.</p>
+      <p><b>Mandato:</b> descubrimiento continuo, roadmap, curación 80/20, política de atípicos, negociación con Seguridad y Legal y retiros.</p>
+    </div>
+    <div class="card accent">
+      <span class="tag green">Ingeniería · factibilidad</span>
+      <h3>Tech Lead (TL)</h3>
+      <p><b>Quién:</b> la persona del equipo de plataforma con más experiencia en el plano de control y el pipeline; conoce las causas de la caída de 4 horas.</p>
+      <p><b>Mandato:</b> arquitectura fuera de la ruta crítica, SLO y guardia, políticas como código, contrato técnico de las contribuciones y deuda técnica.</p>
+    </div>
+  </div>
+  <p style="margin-top:1.1rem">Ambos reportan juntos al CTO y comparten backlog y OKR de resultados. Un consejo de cinco usuarios rotativos, uno de datos, aporta la deseabilidad de la tríada.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Decisión</th><th>Decide</th><th>Aporta</th></tr></thead>
+    <tbody>
+      <tr><td>Qué problemas resolver y qué retirar</td><td><b>PPM</b></td><td>TL: factibilidad, costo y ruta de migración.</td></tr>
+      <tr><td>Arquitectura, herramientas y SLO</td><td><b>TL</b></td><td>PPM: impacto en usuarios y plazos.</td></tr>
+      <tr><td>Golden paths oficiales</td><td><b>PPM y TL</b></td><td>Sin acuerdo, el camino no entra: se evita el scope creep.</td></tr>
+      <tr><td>Atípicos, seguridad y cumplimiento</td><td><b>PPM</b> fija la política</td><td>TL la implementa como mínimos automáticos y política como código.</td></tr>
+      <tr><td>Contribuciones InnerSource</td><td><b>PPM</b> aprueba el RFC</td><td>TL aprueba el contrato técnico con el núcleo.</td></tr>
+      <tr><td>Incidentes del plano de control</td><td><b>TL</b> dirige</td><td>PPM comunica el impacto.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout o"><h3>Regla de desempate</h3><p>Ante un desacuerdo, el dueño de la decisión decide y registra un ADR; si cambia presupuesto o estrategia, la dupla lleva dos opciones al CTO. La dupla se evalúa por adopción voluntaria, lead time, MTTR y satisfacción del desarrollador, no por tickets cerrados.</p></div>
+  </details>
+
+  <details class="content-details"><summary>Ver el análisis de demanda y los dos golden paths del trimestre</summary>
+  <h3 id="golden-paths" style="margin-top:1.5rem">1.2 Regla 80/20: el 20 % de capacidades que usa el 80 % de los equipos</h3>
+  <p>El caso no detalla la demanda: el comité parte de una línea base supuesta y la valida en dos semanas con telemetría, tickets y entrevistas.</p>
+  <figure id="demanda"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" role="img" aria-labelledby="dem-title" style="font-family:Arial,sans-serif">
+<title id="dem-title">Demanda supuesta de los 30 equipos y cobertura de los dos golden paths</title>
+<rect x="34" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="77.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="77.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="128" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="171.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="171.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="222" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="265.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="265.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="316" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="359.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="359.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="410" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="453.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="453.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="504" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="547.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="547.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="598" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="641.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="641.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="692" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="735.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="735.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="786" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="829.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="829.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="880" y="22" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="923.0" y="49" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="923.0" y="69" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="34" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="77.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="77.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="128" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="171.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="171.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="222" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="265.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="265.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="316" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="359.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="359.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="410" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="453.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<text x="453.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">PostgreSQL</text>
+<rect x="504" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="547.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<rect x="598" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="641.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<rect x="692" y="92" width="86" height="62" rx="6" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.8"/>
+<text x="735.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">Node.js</text>
+<rect x="786" y="92" width="86" height="62" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.8"/>
+<text x="829.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Java</text>
+<text x="829.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="880" y="92" width="86" height="62" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.8"/>
+<text x="923.0" y="119" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Java</text>
+<text x="923.0" y="139" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="34" y="162" width="86" height="62" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.8"/>
+<text x="77.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Java</text>
+<text x="77.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="128" y="162" width="86" height="62" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.8"/>
+<text x="171.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Java</text>
+<text x="171.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B23A48">Jenkins</text>
+<rect x="222" y="162" width="86" height="62" rx="6" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.8"/>
+<text x="265.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Java</text>
+<text x="265.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#B23A48">Jenkins</text>
+<rect x="316" y="162" width="86" height="62" rx="6" fill="#FBF3E2" stroke="#B07A16" stroke-width="1.8"/>
+<text x="359.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">React</text>
+<rect x="410" y="162" width="86" height="62" rx="6" fill="#FBF3E2" stroke="#B07A16" stroke-width="1.8"/>
+<text x="453.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">React</text>
+<rect x="504" y="162" width="86" height="62" rx="6" fill="#FBF3E2" stroke="#B07A16" stroke-width="1.8"/>
+<text x="547.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">React</text>
+<rect x="598" y="162" width="86" height="62" rx="6" fill="#F7E4E6" stroke="#B23A48" stroke-width="1.8"/>
+<text x="641.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Datos</text>
+<text x="641.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="692" y="162" width="86" height="62" rx="6" fill="#F7E4E6" stroke="#B23A48" stroke-width="1.8"/>
+<text x="735.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Datos</text>
+<text x="735.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="786" y="162" width="86" height="62" rx="6" fill="#F7E4E6" stroke="#B23A48" stroke-width="1.8"/>
+<text x="829.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Datos</text>
+<text x="829.0" y="209" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2F7A5B">PostgreSQL</text>
+<rect x="880" y="162" width="86" height="62" rx="6" fill="#F7E4E6" stroke="#B23A48" stroke-width="1.8"/>
+<text x="923.0" y="189" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2328">Datos</text>
+<rect x="34" y="242" width="18" height="18" rx="3" fill="#2F7A5B" stroke="#2F7A5B" stroke-width="1.6"/>
+<text x="60" y="256" font-size="15" fill="#1F2328">GP1 · Node.js (18)</text>
+<rect x="219.4" y="242" width="18" height="18" rx="3" fill="#FFFFFF" stroke="#1F2328" stroke-width="1.6"/>
+<text x="245.4" y="256" font-size="15" fill="#1F2328">Java/Kotlin (5)</text>
+<rect x="375.55" y="242" width="18" height="18" rx="3" fill="#FBF3E2" stroke="#B07A16" stroke-width="1.6"/>
+<text x="401.55" y="256" font-size="15" fill="#1F2328">React (3)</text>
+<rect x="497.35" y="242" width="18" height="18" rx="3" fill="#F7E4E6" stroke="#B23A48" stroke-width="1.6"/>
+<text x="523.35" y="256" font-size="15" fill="#1F2328">Datos (4)</text>
+<text x="619.15" y="256" font-size="15" font-weight="700" fill="#2F7A5B">PostgreSQL = GP2 (21)</text>
+<text x="818.1453125" y="256" font-size="15" font-weight="700" fill="#B23A48">Jenkins = en retiro (2)</text>
+<text x="34" y="285" font-size="14" fill="#5F6368">Línea base supuesta para validar con telemetría de pipelines, tickets y entrevistas.</text>
+</svg><figcaption><b>Demanda supuesta.</b> Cada celda es un equipo. 18 equipos construyen microservicios Node.js y 21 usan PostgreSQL. Los dos caminos cubren a 24 de 30 equipos (80 %); los 6 restantes se atienden fuera de los golden paths.</figcaption></figure>
+  <div class="tw"><table>
+    <thead><tr><th>Golden path oficial</th><th>Qué obtiene el equipo en autoservicio</th><th>Compromiso de la plataforma</th></tr></thead>
+    <tbody>
+      <tr><td><b>GP1 · Microservicio Node.js</b><br>TypeScript en contenedor<br><span class="tag green">18 equipos</span></td><td>Template que crea el repositorio con pipeline, pruebas, SAST, SBOM y firma; imagen base, Kustomize, OpenTelemetry, alertas de SLO y despliegue GitOps.</td><td>Guardia, SLO publicado, Node.js LTS e imagen base al día, documentación por tareas.</td></tr>
+      <tr><td><b>GP2 · PostgreSQL gestionado</b><br>BD por servicio<br><span class="tag green">21 equipos</span></td><td>Claim de Crossplane, backups con restauración a un punto en el tiempo, credenciales rotadas y migraciones en el pipeline.</td><td>Versión soportada, parches, restauración probada cada trimestre y SLO.</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:1rem"><b>Por qué dos y no tres:</b> son los flujos con más tráfico y más carga cognitiva retirada; un tercero dividiría a un equipo ya saturado.</p>
+  <h3 style="margin-top:1.6rem">Lo que queda fuera este trimestre</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Demanda</th><th>Tratamiento</th><th>Nivel de soporte</th></tr></thead>
+    <tbody>
+      <tr><td>5 equipos Java/Kotlin</td><td>Primitivas y biblioteca de CI genérica; se reevalúa si la demanda crece.</td><td><span class="tag">Primitivas</span></td></tr>
+      <tr><td>3 equipos React</td><td>Template aportado por Frontend mediante InnerSourcing (3.1).</td><td><span class="tag amber">Comunitario</span></td></tr>
+      <tr><td>4 equipos de datos</td><td>Ruta propia con mínimos automáticos (1.3).</td><td><span class="tag red">Propia</span></td></tr>
+      <tr><td>2 equipos en Jenkins</td><td>Congelado y en retiro (3.2).</td><td><span class="tag red">En retiro</span></td></tr>
+      <tr><td>Clústeres por equipo, otros motores de BD, pipelines a medida</td><td>No se construyen; el PPM indaga el dolor real (un clúster propio suele esconder despliegues lentos).</td><td><span class="tag">Fuera de alcance</span></td></tr>
+    </tbody>
+  </table></div>
+  </details>
+
+  <details class="content-details"><summary>Ver la política oficial para los equipos de datos</summary>
+  <h3 id="atipicos" style="margin-top:1.5rem">1.3 Política para casos atípicos</h3>
+  <p>Dos párrafos, como exige el enunciado: convierte los scripts ocultos en rutas visibles sin castigo y deja explícito quién las opera.</p>
+  <article class="memo" aria-label="Política oficial de rutas propias">
+    <div class="memo-head"><span>Comunicado del PPM · Plataforma LogisTech</span><span>Para: equipos de datos · Vigente desde la semana 2</span></div>
+    <h3>Rutas propias fuera del camino pavimentado</h3>
+    <p>Los golden paths de este trimestre cubren microservicios Node.js y PostgreSQL, y reconocemos que sus pipelines de datos no encajan en ellos. Pueden desplegar fuera del camino pavimentado sin pedir aprobación y sin penalización en evaluación, presupuesto o prioridad. Los scripts que ya construyeron no son una falta: les pedimos registrarlos en el catálogo en 30 días con un archivo <code>catalog-info.yaml</code>. Tendrán acceso directo a las primitivas (namespace, API de Kubernetes, almacenamiento e identidad de mínimo privilegio) con sus credenciales corporativas. El mandato de usar la plataforma se sustituye por cuatro mínimos de resultado, iguales para cualquier ruta.</p>
+    <p>Salir de la ruta significa asumir su operación: cada equipo es dueño de su pipeline, su guardia, sus parches y su recuperación. La plataforma no atiende incidentes de rutas propias, pero ofrece office hours y revisión de diseño. Los cuatro mínimos se verifican automáticamente: identidad y secretos gestionados, escaneo y firma del artefacto, telemetría básica y tratamiento de datos según su clasificación. Cada trimestre revisaremos juntos su telemetría; si tres o más equipos comparten una necesidad, la evaluaremos como golden path o contribución InnerSource. Pueden volver al camino pavimentado cuando quieran.</p>
+    <p class="memo-sign">Platform Product Manager · con el Tech Lead de plataforma</p>
+  </article>
+  <p class="muted" style="margin-top:1rem">Sin castigo, ocultar deja de ser necesario (shadow IT); la operación propia evita que la plataforma absorba casos particulares (cuello de botella); los mínimos automáticos protegen sin gatekeeping, y la revisión trimestral convierte lo atípico recurrente en candidato a pavimentar.</p>
+  </details>
+</section>
+
+<!-- II · FUERA DE LA RUTA CRÍTICA -->
+<section class="s" id="ii">
+  <div class="kicker"><span class="sec">II</span>Arquitectura fuera de la ruta crítica</div>
+  <h2>La caída del portal ya no detiene un despliegue</h2>
+  <p>En la caída de 4 horas nadie pudo ejecutar CI/CD porque el portal estaba en la ruta de entrega. El rediseño separa dos planos: el de control acelera; la entrega solo depende del repositorio, el runner, el registro y el clúster.</p>
+  <div class="grid three-grid summary-grid">
+    <div class="card accent"><h3>Pipeline en el repo</h3><p>Junto al código, con la biblioteca de CI fijada; no consulta al portal ni a la API.</p></div>
+    <div class="card accent"><h3>GitOps en cada clúster</h3><p>Argo CD corre en cada clúster y sincroniza desde Git; la API solo escribe PR.</p></div>
+    <div class="card accent"><h3>Controles que viajan</h3><p>Pruebas, políticas y firma en el pipeline; Kyverno verifica la firma en el clúster.</p></div>
+  </div>
+  <figure class="drawio-fig" id="resiliencia">
+    <div class="diagram-viewer">
+      <div class="diagram-viewer-toolbar"><button type="button" data-zoom="in" aria-label="Ampliar diagrama">+ Zoom</button><button type="button" data-zoom="out" aria-label="Reducir diagrama">− Zoom</button><button type="button" data-zoom="fit">Ajustar</button></div>
+      <div class="diagram-viewer-stage" style="aspect-ratio:1100 / 990"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 990" width="1100" height="990" role="img" aria-labelledby="res-title res-desc">
+<title id="res-title">Arquitectura lógica fuera de la ruta crítica</title>
+<desc id="res-desc">El plano de control (Backstage, API de plataforma y Crossplane) acelera la entrega pero no participa en ella. La ruta crítica va del repositorio del equipo al runner de CI, al registro replicado y al repositorio de entorno; Argo CD local sincroniza desde Git, la admisión de Kyverno verifica la firma y las cargas descargan la imagen de la réplica. Un procedimiento break-glass auditado cubre la falla de Argo CD local. F1 a F6 enlazan con la matriz de fallos.</desc>
+<defs><marker id="ar-g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2F7A5B"/></marker><marker id="ar-o" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#B07A16"/></marker><marker id="ar-a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#B23A48"/></marker></defs>
+<rect width="1100" height="990" fill="#FFFFFF"/>
+<rect x="30" y="90" width="1040" height="175" rx="10" fill="#FBF6EA" stroke="#B07A16" stroke-width="2" stroke-dasharray="8 6"/>
+<rect x="30" y="315" width="1040" height="220" rx="10" fill="#EFF6F2" stroke="#2F7A5B" stroke-width="2"/>
+<rect x="30" y="585" width="1040" height="190" rx="10" fill="#F7EEF0" stroke="#B23A48" stroke-width="2"/>
+<rect x="50" y="140" width="300" height="105" rx="10" fill="#FFFFFF" stroke="#B07A16" stroke-width="2"/>
+<rect x="400" y="140" width="300" height="105" rx="10" fill="#FFFFFF" stroke="#B07A16" stroke-width="2"/>
+<rect x="750" y="140" width="300" height="105" rx="10" fill="#FFFFFF" stroke="#B07A16" stroke-width="2"/>
+<rect x="50" y="365" width="230" height="135" rx="10" fill="#FFFFFF" stroke="#2F7A5B" stroke-width="2"/>
+<rect x="306" y="365" width="230" height="135" rx="10" fill="#FFFFFF" stroke="#2F7A5B" stroke-width="2"/>
+<rect x="562" y="365" width="230" height="135" rx="10" fill="#FFFFFF" stroke="#2F7A5B" stroke-width="2"/>
+<rect x="818" y="365" width="230" height="135" rx="10" fill="#FFFFFF" stroke="#2F7A5B" stroke-width="2"/>
+<rect x="750" y="630" width="300" height="115" rx="10" fill="#FFFFFF" stroke="#B23A48" stroke-width="2"/>
+<rect x="400" y="630" width="300" height="115" rx="10" fill="#FFFFFF" stroke="#B23A48" stroke-width="2"/>
+<rect x="50" y="630" width="300" height="115" rx="10" fill="#FFFFFF" stroke="#B23A48" stroke-width="2"/>
+<rect x="400" y="815" width="650" height="82" rx="10" fill="#FFFFFF" stroke="#B23A48" stroke-width="2"/>
+<polyline points="280,432 306,432" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="536,432 562,432" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="792,432 818,432" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="933,500 933,630" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="750,687 700,687" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="400,687 350,687" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="677,500 677,560 200,560 200,630" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#ar-g)"/>
+<polyline points="250,245 250,365" fill="none" stroke="#B07A16" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ar-o)"/>
+<polyline points="550,245 550,290 980,290 980,365" fill="none" stroke="#B07A16" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ar-o)"/>
+<polyline points="550,815 550,745" fill="none" stroke="#B23A48" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ar-a)"/>
+<polyline points="30,935 70,935" fill="none" stroke="#2F7A5B" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="300,935 340,935" fill="none" stroke="#B07A16" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<polyline points="540,935 580,935" fill="none" stroke="#B23A48" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="7 5"/>
+<rect x="308.4" y="128" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="315.4" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F1</text>
+<rect x="658.5" y="128" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="665.5" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F2</text>
+<rect x="1008.5" y="128" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="1015.5" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F3</text>
+<rect x="494.4" y="353" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="501.4" y="370" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F4</text>
+<rect x="750.5" y="353" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="757.5" y="370" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F5</text>
+<rect x="1008.5" y="618" width="31.6" height="24" rx="4" fill="#FFFFFF" stroke="#B23A48" stroke-width="1.6"/>
+<text x="1015.5" y="635" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">F6</text>
+<rect x="262.0" y="278" width="117.8" height="24" rx="4" fill="#FFFFFF"/>
+<text x="269.0" y="295" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B07A16">plantilla inicial</text>
+<rect x="700.0" y="278" width="118.5" height="24" rx="4" fill="#FFFFFF"/>
+<text x="707.0" y="295" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B07A16">PR declarativo</text>
+<rect x="945.0" y="552" width="88.4" height="24" rx="4" fill="#FFFFFF"/>
+<text x="952.0" y="569" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#2F7A5B">sincroniza</text>
+<rect x="330.0" y="548" width="125.2" height="24" rx="4" fill="#FFFFFF"/>
+<text x="337.0" y="565" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#2F7A5B">imagen firmada</text>
+<rect x="562.0" y="768" width="106.7" height="24" rx="4" fill="#FFFFFF"/>
+<text x="569.0" y="785" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#B23A48">contingencia</text>
+<text x="30" y="38" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#1F2328">TO-BE · La entrega no depende del plano de control</text>
+<text x="30" y="66" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#5F6368">Las líneas continuas forman la ruta crítica; el plano de control solo acelera.</text>
+<text x="46" y="118" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#B07A16">PLANO DE CONTROL</text>
+<text x="46" y="343" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#2F7A5B">RUTA DE ENTREGA</text>
+<text x="46" y="613" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#B23A48">PRODUCCIÓN</text>
+<text x="66" y="170" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Portal Backstage</text>
+<text x="66" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Catálogo, templates y docs</text>
+<text x="66" y="219" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Solo lee Git y telemetría</text>
+<text x="416" y="170" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">API de plataforma</text>
+<text x="416" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Crea servicios, entornos y BD</text>
+<text x="416" y="219" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Escribe un PR en Git</text>
+<text x="766" y="170" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Crossplane</text>
+<text x="766" y="196" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Provisiona infraestructura</text>
+<text x="766" y="219" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Lo creado sigue operando</text>
+<text x="66" y="395" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Repo del equipo</text>
+<text x="66" y="421" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Código y pipeline</text>
+<text x="66" y="444" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Manifiestos y SLO</text>
+<text x="66" y="467" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Biblioteca CI fijada</text>
+<text x="322" y="395" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Runner de CI</text>
+<text x="322" y="421" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Compila y prueba</text>
+<text x="322" y="444" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Políticas en caché</text>
+<text x="322" y="467" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Firma la imagen</text>
+<text x="578" y="395" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Registro</text>
+<text x="578" y="421" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Imagen firmada</text>
+<text x="578" y="444" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Réplica regional</text>
+<text x="578" y="467" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Lectura sin la IDP</text>
+<text x="834" y="395" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Repo de entorno</text>
+<text x="834" y="421" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Versión deseada</text>
+<text x="834" y="444" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">PR del pipeline</text>
+<text x="834" y="467" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Fuente de verdad</text>
+<text x="766" y="660" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Argo CD local</text>
+<text x="766" y="686" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Agente pull en el clúster</text>
+<text x="766" y="709" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Reconcilia desde Git</text>
+<text x="416" y="660" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Admisión Kyverno</text>
+<text x="416" y="686" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Verifica firma y políticas</text>
+<text x="416" y="709" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Reglas dentro del clúster</text>
+<text x="66" y="660" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Cargas de trabajo</text>
+<text x="66" y="686" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Servicios en producción</text>
+<text x="66" y="709" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Imagen desde la réplica</text>
+<text x="416" y="845" font-family="Arial, sans-serif" font-size="19" font-weight="700" fill="#1F2328">Break-glass · si falla Argo CD local (F6)</text>
+<text x="416" y="871" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">Credencial temporal, dos aprobaciones, auditoría y PR posterior</text>
+<text x="80" y="941" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#1F2328">Ruta crítica de entrega</text>
+<text x="350" y="941" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#1F2328">Acelera, no bloquea</text>
+<text x="590" y="941" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#1F2328">Contingencia auditada</text>
+<text x="30" y="973" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5F6368">F1–F6 corresponden a la matriz de fallos 2.2. Los recursos existentes no dependen del plano de control.</text>
+</svg></div>
+    </div>
+    <figcaption><b>TO-BE.</b> Las líneas verdes forman la ruta crítica: repositorio → runner → registro → repositorio de entorno → Argo CD local → admisión → cargas. Backstage, la API y Crossplane quedan fuera de ella. Los identificadores F1–F6 enlazan con la matriz 2.2. El diagrama editable está en <code>diagramas/tobe-resiliencia.drawio</code>.</figcaption>
+  </figure>
+  <p class="brief-line"><strong>Principio de diseño:</strong> Git es la fuente de verdad y el clúster aplica lo que declara. Si el plano de control cae, se pierde comodidad, no la capacidad de entregar.</p>
+
+  <details class="content-details"><summary>Ver el mecanismo de contingencia paso a paso</summary>
+  <h3 id="mecanismo" style="margin-top:1.5rem">2.1 Cómo se compila, prueba y despliega con el portal caído</h3>
+  <ol class="equipo-steps">
+    <li><b>1. Compilar y probar</b>El push al repositorio dispara el pipeline del equipo en el runner de CI del sistema de control de versiones. La biblioteca de plataforma está fijada por SemVer y cacheada en el runner; las dependencias salen de un proxy con caché.</li>
+    <li><b>2. Validar de forma segura</b>El pipeline ejecuta pruebas, SAST y escaneo de imagen, y evalúa el bundle de políticas OPA firmado y cacheado. Si el bundle no se puede renovar, usa la última versión válida durante su vigencia de 7 días y emite una alerta.</li>
+    <li><b>3. Publicar el artefacto</b>La imagen se firma con Cosign y se publica en el registro primario y en la réplica de la región del clúster. El pipeline abre un PR con la nueva versión en el repositorio de entorno.</li>
+    <li><b>4. Desplegar en producción</b>Argo CD, que corre dentro del clúster de aplicaciones, detecta el cambio en Git y reconcilia. Kyverno rechaza cualquier imagen sin firma válida. El rollback es un revert en Git.</li>
+  </ol>
+  <h3 style="margin-top:1.6rem">Interfaz dual: cada acción del portal tiene una alternativa</h3>
+  <p class="table-hint">Desliza la tabla horizontalmente para consultar las tres columnas.</p>
+  <div class="tw" tabindex="0" role="region" aria-label="Interfaz dual, tabla desplazable"><table class="wide-table">
+    <thead><tr><th>Acción</th><th>Con el portal disponible</th><th>Con el portal o la API caídos</th></tr></thead>
+    <tbody>
+      <tr><td>Desplegar y hacer rollback</td><td>Botón del portal sobre el mismo flujo GitOps.</td><td><b>Sin cambio.</b> Push o revert en Git; el portal nunca formó parte del despliegue.</td></tr>
+      <tr><td>Crear un servicio nuevo</td><td>Template en Backstage.</td><td>CLI <code>platform new</code>, que clona el repositorio de templates versionado. La creación se degrada, pero no se bloquea.</td></tr>
+      <tr><td>Crear una BD o un entorno</td><td>Formulario que llama a la API, que escribe un PR.</td><td>PR manual con el mismo YAML, validado por el pipeline. Se aplica cuando Crossplane vuelve; los recursos existentes no se afectan.</td></tr>
+      <tr><td>Ver estado, logs y métricas</td><td>Página del servicio en el catálogo.</td><td>Interfaz de Argo CD del clúster y Grafana, ambos con SSO corporativo.</td></tr>
+      <tr><td>Rotar un secreto</td><td>Acción del portal.</td><td>Gestor de secretos de la nube; External Secrets sincroniza dentro del clúster.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout g"><h3>La caída de 4 horas con este diseño</h3><p>Los equipos habrían seguido desplegando y revirtiendo cambios. Solo se habría retrasado la creación de servicios y bases de datos nuevas, que se resuelve con la CLI o se encola en Git hasta que vuelva el plano de control.</p></div>
+  </details>
+
+  <details class="content-details"><summary>Ver la matriz de fallos y las dependencias residuales</summary>
+  <h3 id="fallos" style="margin-top:1.5rem">2.2 Matriz de fallos F1–F6</h3>
+  <p class="table-hint">Desliza la tabla horizontalmente para consultar las cuatro columnas.</p>
+  <div class="tw" tabindex="0" role="region" aria-label="Matriz de fallos, tabla desplazable"><table class="wide-table">
+    <thead><tr><th>Falla</th><th>Sigue funcionando</th><th>Se degrada</th><th>Mecanismo y recuperación</th></tr></thead>
+    <tbody>
+      <tr><td><span class="fid">F1</span>Backstage caído</td><td>Compilar, probar, desplegar y revertir.</td><td>Catálogo, templates y documentación visual.</td><td>Ni el pipeline ni Argo CD lo consultan. La documentación también está en Markdown en cada repositorio.</td></tr>
+      <tr><td><span class="fid">F2</span>API de plataforma caída</td><td>Todo el flujo de entrega.</td><td>Creación automatizada de servicios, entornos y BD.</td><td>La API solo escribe PR. En contingencia, el equipo abre el PR manual con el mismo esquema.</td></tr>
+      <tr><td><span class="fid">F3</span>Clúster de gestión o Crossplane caídos</td><td>Despliegues y operación de la infraestructura existente.</td><td>Aprovisionamiento y cambios de infraestructura.</td><td>Aislamiento físico: el clúster de gestión no ejecuta cargas de cliente. Los cambios se encolan en Git y se reconcilian al volver.</td></tr>
+      <tr><td><span class="fid">F4</span>Runners compartidos caídos o saturados</td><td>Producción y cambios ya publicados.</td><td>Velocidad de compilación.</td><td>Pool de runners en dos zonas. Los equipos con servicios críticos tienen un runner de respaldo con la misma imagen y biblioteca.</td></tr>
+      <tr><td><span class="fid">F5</span>Registro primario caído</td><td>Despliegues desde la réplica regional.</td><td>Publicación en el primario.</td><td>El pipeline publica en ambos y los nodos descargan de la réplica cercana. La firma se verifica igual en cualquier copia.</td></tr>
+      <tr><td><span class="fid">F6</span>Argo CD local caído</td><td>Las cargas en ejecución.</td><td>Despliegue automático en ese clúster.</td><td>Break-glass: credencial temporal OIDC de 1 hora, aprobación del autor y de otra persona, admisión que sigue validando la firma, auditoría y PR de reconciliación en 24 horas.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 style="margin-top:1.6rem">Dependencias residuales declaradas</h3>
+  <p>El alojamiento de Git, el proveedor de identidad y la nube son dependencias de toda la compañía, no del equipo de plataforma. Se tratan con el SLA del proveedor, un espejo de solo lectura del repositorio de entorno para Argo CD y el procedimiento break-glass. Ninguna de ellas pasa por el portal ni por la API de la IDP.</p>
+  <div class="guard-grid">
+    <article class="guard-card"><div class="guard-number">1</div><div><h3>Sin bloqueos operativos</h3><p>Si la plataforma cae, los equipos aún parchean, corrigen y escalan.</p></div></article>
+    <article class="guard-card"><div class="guard-number">2</div><div><h3>Autoservicio, no gatekeeper</h3><p>Ningún despliegue espera una aprobación manual del equipo de plataforma.</p></div></article>
+    <article class="guard-card"><div class="guard-number">3</div><div><h3>Menor blast radius</h3><p>Un fallo o un exploit en el clúster de gestión no alcanza las cargas de producción.</p></div></article>
+    <article class="guard-card"><div class="guard-number">4</div><div><h3>Vía de escape auditada</h3><p>El break-glass existe, cuesta dos aprobaciones y deja evidencia. Su uso frecuente se trata como un defecto de la ruta.</p></div></article>
+  </div>
+  </details>
+
+  <details class="content-details"><summary>Ver cómo se demuestra la contingencia</summary>
+  <h3 id="verificacion" style="margin-top:1.5rem">2.3 Verificación y evolución sin interrumpir la entrega</h3>
+  <div class="grid three-grid">
+    <div class="card accent"><h3>Game day trimestral</h3><p>Se apagan el portal y la API durante 4 horas, como en el incidente. Criterio de éxito: el 100 % de los equipos en golden paths despliega y revierte un cambio dentro de la ventana.</p></div>
+    <div class="card accent"><h3>SLO separados</h3><p>El plano de control tiene su propio SLO. La entrega se mide con un indicador distinto: despliegues bloqueados por la plataforma, con meta cero.</p></div>
+    <div class="card accent"><h3>Pruebas fuera de banda</h3><p>Las nuevas versiones de la biblioteca de CI y de la plataforma se prueban como release candidates en vista previa. Cada equipo adopta la versión nueva cuando decide, gracias a SemVer.</p></div>
+  </div>
+  </details>
+</section>
+
+<!-- III · INNERSOURCING, PULL Y DEUDA -->
+<section class="s" id="iii">
+  <div class="kicker"><span class="sec">III</span>InnerSourcing, adopción pull y deuda técnica</div>
+  <h2>Contribuir sin transferir la responsabilidad, retirar sin mandato</h2>
+  <p>La demanda crece más rápido que el equipo de plataforma. La comunidad amplía el catálogo con propiedad clara, y el retiro de Jenkins (2 de 30 equipos, 30 % del mantenimiento) libera capacidad.</p>
+  <div class="grid three-grid summary-grid">
+    <div class="card accent"><h3>Un dueño por activo</h3><p>Frontend posee el template React; la plataforma, el orquestador y su contrato.</p></div>
+    <div class="card accent"><h3>Alertas según el origen</h3><p>Template → Frontend; app generada → su equipo; núcleo → guardia de plataforma.</p></div>
+    <div class="card accent"><h3>Jenkins sale por atracción</h3><p>Se congela, se cierra la brecha y se apaga cuando la nueva ruta ya funciona mejor.</p></div>
+  </div>
+  <p class="brief-line"><strong>Regla de propiedad:</strong> contribuir no es transferir. Cada activo tiene un solo equipo dueño, que conserva el veto y la guardia.</p>
+
+  <details class="content-details"><summary>Ver la política de InnerSourcing para el template React</summary>
+  <h3 id="innersource" style="margin-top:1.5rem">3.1 Modelo de contribución con límites estrictos</h3>
+  <p>El template vive en el repositorio de templates del catálogo, en <code>templates/react-web/</code>, con su propio archivo <code>CODEOWNERS</code>. Entra con la etiqueta <span class="tag amber">Comunitario</span>, separada de los golden paths oficiales.</p>
+  <div class="scenario-flow">
+    <article class="scenario-step"><h3>RFC previo</h3><p>Frontend presenta el caso de uso, la demanda (tres equipos React) y por qué las API actuales no bastan. El PPM aprueba el encaje y el TL el contrato técnico.</p></article>
+    <article class="scenario-step auto"><h3>Controles automáticos</h3><p>Antes de la revisión humana: lint, pruebas, generación de una app de muestra que ejecuta su pipeline completo y políticas OPA/Kyverno.</p><div class="scenario-checks"><span class="tag green">pipeline ✓</span><span class="tag green">políticas ✓</span></div></article>
+    <article class="scenario-step"><h3>Revisión humana</h3><p>Un mantenedor de Frontend revisa el código React. Un trusted committer de plataforma revisa solo la integración: biblioteca de CI, metadatos del catálogo, secretos y pasos estándar.</p></article>
+    <article class="scenario-step auto"><h3>Publicación versionada</h3><p>Se publica como v1.0.0 comunitario. Los cambios siguen SemVer y las apps generadas adoptan nuevas versiones de forma voluntaria.</p></article>
+  </div>
+  <h3 style="margin-top:1.6rem">¿Quién atiende la guardia si falla dentro de 3 meses?</h3>
+  <p>El template no corre en producción; lo que corre son las apps que genera. Por eso la alerta se enruta según el origen de la falla, usando el campo <code>owner</code> del catálogo.</p>
+  <div class="route-grid">
+    <div class="route owner"><span class="lbl">Origen · el template</span><h3>Scaffolding o configuración generada defectuosa</h3><p>Por ejemplo, el pipeline generado falla en todas las apps nuevas o el manifiesto base es incorrecto.</p><div class="to">Responde <b>Frontend</b>, propietario del template. Corrige y publica un parche.</div></div>
+    <div class="route consumer"><span class="lbl">Origen · la app generada</span><h3>Incidente de una aplicación en producción</h3><p>Una vez generado, el código pertenece al equipo que lo creó y lo modificó.</p><div class="to">Responde <b>el equipo propietario de la app</b>. Si la causa es el template, abre un issue a Frontend.</div></div>
+    <div class="route platform"><span class="lbl">Origen · el núcleo</span><h3>Scaffolder, biblioteca de CI o plano de control</h3><p>Fallas de los servicios centrales que ejecutan cualquier template.</p><div class="to">Responde <b>la guardia de plataforma</b>, solo por los servicios centrales.</div></div>
+  </div>
+  <div class="tw" style="margin-top:1.2rem"><table>
+    <thead><tr><th>Acuerdo</th><th>Compromiso explícito</th></tr></thead>
+    <tbody>
+      <tr><td>Propiedad</td><td>Frontend es dueño del template y conserva el veto sobre PR de otros equipos. La plataforma no lo mantiene: un kit de inicio no forma parte de su roadmap.</td></tr>
+      <tr><td>Límites técnicos</td><td>El template solo usa primitivas publicadas y la biblioteca de CI. No modifica el orquestador ni crea tipos de infraestructura nuevos, y se ejecuta como extensión aislada.</td></tr>
+      <tr><td>Soporte</td><td>Las alertas del template entran en la rotación de Frontend, con respuesta en un día hábil para fallas que bloquean la creación de apps. La guardia se mantiene sostenible: como máximo el 25 % del tiempo de un ingeniero y unas 5 alertas por semana.</td></tr>
+      <tr><td>Ciclo de vida</td><td>Si el template no tiene mantenimiento (una falla bloqueante sin atender durante 10 días hábiles o dos trimestres sin actualizarse), pasa a <i>deprecated</i> y se oculta del catálogo. No se transfiere a la plataforma por omisión.</td></tr>
+      <tr><td>Promoción</td><td>Si la adopción crece y el PPM lo prioriza como golden path, la transferencia a plataforma se acuerda de forma explícita, con fecha y traspaso de la guardia.</td></tr>
+    </tbody>
+  </table></div>
+  </details>
+
+  <details class="content-details"><summary>Ver el plan de tres pasos para retirar Jenkins</summary>
+  <h3 id="deprecacion" style="margin-top:1.5rem">3.2 Plan de deprecación por adopción pull</h3>
+  <p>Jenkins sirve a 2 de 30 equipos y consume el 30 % del mantenimiento. Un apagado por fecha paralizaría a esos equipos y repetiría el mandato que generó shadow IT. El plan consiste en que la nueva ruta resulte más fácil que quedarse, y en apagar Jenkins solo cuando la evidencia lo permita.</p>
+  <div class="timeline">
+    <article class="tl-step">
+      <div class="tl-head"><span class="tl-num">1</span><span class="tl-when">Paso 1<br>Semanas 0–4</span></div>
+      <div class="tl-body"><h3>Entender y congelar</h3>
+        <ul class="clean">
+          <li>Inventario de jobs, plugins y pasos propios con telemetría y entrevistas a los dos equipos.</li>
+          <li>Congelamiento: sin funcionalidades nuevas ni usuarios nuevos; se mantienen parches de seguridad.</li>
+          <li>ADR con el porqué y la lista de verificación de obsolescencia. Se anuncia una fecha objetivo que depende de una condición.</li>
+        </ul></div>
+      <div class="tl-exit"><strong>Condición de avance</strong>Brecha identificada: qué hace Jenkins que la ruta nueva aún no ofrece.</div>
+    </article>
+    <article class="tl-step">
+      <div class="tl-head"><span class="tl-num">2</span><span class="tl-when">Paso 2<br>Semanas 4–10</span></div>
+      <div class="tl-body"><h3>Hacer que migrar sea más fácil</h3>
+        <ul class="clean">
+          <li>La plataforma cierra la brecha en la biblioteca de CI y la ofrece a todos los equipos.</li>
+          <li>Conversor de Jenkinsfile y una a dos semanas de pairing por equipo.</li>
+          <li>Ventana de superposición: ambos pipelines corren en paralelo y se comparan resultados.</li>
+          <li>Migra primero el equipo más sencillo y comparte sus métricas de tiempo de build.</li>
+        </ul></div>
+      <div class="tl-exit"><strong>Condición de avance</strong>Cada equipo completa 10 despliegues seguidos por la ruta nueva sin volver a Jenkins.</div>
+    </article>
+    <article class="tl-step">
+      <div class="tl-head"><span class="tl-num">3</span><span class="tl-when">Paso 3<br>Semanas 10–13</span></div>
+      <div class="tl-body"><h3>Retirar con evidencia</h3>
+        <ul class="clean">
+          <li>Jenkins pasa a solo lectura y conserva el historial 90 días; después se archiva.</li>
+          <li>El 30 % liberado se asigna a las capacidades que pidieron los equipos y el resultado se publica.</li>
+          <li>Si un equipo no alcanza la condición, no se apaga: puede seguir operando su Jenkins bajo la política de rutas propias.</li>
+        </ul></div>
+      <div class="tl-exit"><strong>Condición de salida</strong>0 % del mantenimiento en Jenkins y ningún equipo bloqueado.</div>
+    </article>
+  </div>
+  <div class="tw" style="margin-top:1.2rem"><table>
+    <thead><tr><th>Palanca de atracción</th><th>Cómo se aplica a los dos equipos</th></tr></thead>
+    <tbody>
+      <tr><td>Más fácil</td><td>El conversor y el pairing hacen que migrar cueste menos que mantener los plugins propios.</td></tr>
+      <tr><td>Segura por defecto</td><td>Escaneo, firma y secretos vienen incluidos; en Jenkins cada equipo los mantenía a mano.</td></tr>
+      <tr><td>Sin sobrecarga cognitiva</td><td>Desaparece el mantenimiento de agentes y plugins de Jenkins.</td></tr>
+      <tr><td>Migración progresiva</td><td>La superposición evita un big-bang: cada equipo decide cuándo apagar su pipeline antiguo.</td></tr>
+    </tbody>
+  </table></div>
+  </details>
+</section>
+
+<!-- CIERRE -->
+<section class="s" id="cierre">
+  <div class="kicker">Cierre del comité</div>
+  <h2>De la adopción por mandato a la adopción por valor</h2>
+  <p>Un trimestre de 13 semanas con revisión de evidencia al final de cada fase. Fechas y metas son propuestas a validar con la línea base.</p>
+  <div class="grid three-grid summary-grid">
+    <div class="card accent"><h3>Semanas 0–4 · Enfocar</h3><p>Dupla, demanda validada, política de rutas propias y Jenkins congelado.</p></div>
+    <div class="card accent"><h3>Semanas 4–9 · Desacoplar</h3><p>Golden paths v1 con SLO, Argo CD por clúster, registro replicado y RFC del template React.</p></div>
+    <div class="card accent"><h3>Semanas 9–13 · Escalar</h3><p>Game day sin portal, template comunitario y Jenkins retirado o transferido.</p></div>
+  </div>
+
+  <details class="content-details"><summary>Ver la hoja de ruta, las métricas y la madurez esperada</summary>
+  <h3 id="hoja-ruta" style="margin-top:1.4rem">Hoja de ruta y condiciones de avance</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Fase</th><th>Resultado y responsables</th><th>Condición de avance</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · Enfocar</b><br>Semanas 0–4</td><td>El CTO nombra la dupla. El PPM valida la demanda y publica la política de rutas propias. El TL diseña la separación de planos. Jenkins queda congelado.</td><td>Demanda validada, rutas propias registradas en el catálogo y brecha de Jenkins identificada.</td></tr>
+      <tr><td><b>2 · Desacoplar</b><br>Semanas 4–9</td><td>El TL despliega Argo CD por clúster, la réplica del registro y la biblioteca de CI fijada. GP1 y GP2 publican su SLO. Frontend presenta el RFC.</td><td>Todos los equipos en golden paths despliegan sin consultar al portal. RFC aprobado.</td></tr>
+      <tr><td><b>3 · Escalar</b><br>Semanas 9–13</td><td>Game day con el portal y la API apagados. Template React v1.0.0 comunitario. Migración y retiro de Jenkins.</td><td>Game day superado, Jenkins en solo lectura o transferido y capacidad liberada asignada al roadmap.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 id="metricas" style="margin-top:1.6rem">Trazabilidad de las tres crisis</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Crisis y decisión</th><th>Línea base del caso</th><th>Meta y evidencia</th></tr></thead>
+    <tbody>
+      <tr><td>Cuello de botella → dupla, 80/20, InnerSourcing y retiro de Jenkins</td><td>Soporte a cada caso particular de 30 equipos. Jenkins consume el 30 % del mantenimiento.</td><td>24 de 30 equipos en un golden path, 0 % del tiempo en Jenkins y más solicitudes resueltas por autoservicio.</td></tr>
+      <tr><td>Ruta crítica → separación de planos y GitOps por clúster</td><td>4 horas sin CI/CD para toda la compañía.</td><td>Cero despliegues bloqueados por caídas del plano de control y game day trimestral superado.</td></tr>
+      <tr><td>Shadow IT → política de rutas propias</td><td>Scripts de despliegue construidos en secreto.</td><td>El 100 % de las rutas propias registradas en 30 días y con sus cuatro mínimos verificados automáticamente.</td></tr>
+      <tr><td>Mandato → adopción voluntaria</td><td>Uso obligatorio impuesto por el CTO.</td><td>Adopción medida por telemetría, CSAT/NPS trimestral y lead time por equipo.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 style="margin-top:1.6rem">Madurez CNCF: del nivel actual al adyacente</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Aspecto</th><th>Hoy, según el caso</th><th>Meta del trimestre</th></tr></thead>
+    <tbody>
+      <tr><td>Inversión</td><td>Nivel 2 · equipo dedicado como centro de costos.</td><td>Nivel 3 · producto justificado por resultados y por el 30 % liberado.</td></tr>
+      <tr><td>Adopción</td><td>Nivel 2 · imposición extrínseca.</td><td>Nivel 3 · atracción intrínseca, con rasgos participativos por InnerSourcing.</td></tr>
+      <tr><td>Interfaces</td><td>Portal como punto único de falla.</td><td>Nivel 3 · autoservicio con interfaz dual: portal, CLI y Git.</td></tr>
+      <tr><td>Operaciones</td><td>Nivel 2 · soporte central con cuello de botella.</td><td>Nivel 3 · habilitación central y entrega continua.</td></tr>
+      <tr><td>Medición</td><td>Sin evidencia de medición sistemática.</td><td>Nivel 3 · DORA y satisfacción del desarrollador.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted" style="margin-top:.8rem">El nivel 4 no es un objetivo universal. Se apunta al nivel adyacente donde el impacto lo justifica.</p>
+  </details>
+
+  <details class="content-details"><summary>Ver riesgos y supuestos</summary>
+  <h3 style="margin-top:1.4rem">Riesgos que condicionan el modelo</h3>
+  <div class="tw"><table>
+    <thead><tr><th>Riesgo</th><th>Tratamiento y señal de decisión</th></tr></thead>
+    <tbody>
+      <tr><td>El PPM termina gestionando tickets</td><td>Perfil de descubrimiento, OKR de resultados y patrocinio del CTO. Señal: el backlog vuelve a llenarse de solicitudes literales.</td></tr>
+      <tr><td>Muchos equipos salen de la ruta pavimentada</td><td>Salir implica operar por cuenta propia y cumplir los mismos mínimos. Si aun así salen, es una señal de producto que el PPM investiga, no una falta.</td></tr>
+      <tr><td>Frontend no sostiene la guardia del template</td><td>Límite de carga de guardia. Si se supera, el template pasa a deprecated o se negocia su promoción a golden path.</td></tr>
+      <tr><td>El break-glass se usa como atajo</td><td>Dos aprobaciones, credencial de 1 hora, auditoría y revisión mensual. Más de un uso al mes en un clúster abre un análisis de la ruta.</td></tr>
+      <tr><td>Un equipo de Jenkins no logra migrar</td><td>No se apaga por fecha. Se amplía la ventana o el equipo asume la operación de su instancia como ruta propia.</td></tr>
+      <tr><td>La adopción cae al retirar el mandato</td><td>El liderazgo sostiene la inversión inicial y la telemetría muestra el efecto. Una caída sostenida indica requerimientos que faltan en los golden paths.</td></tr>
+    </tbody>
+  </table></div>
+  <h3 id="supuestos" style="margin-top:1.6rem">Supuestos a validar</h3>
+  <ul class="check">
+    <li>La distribución de la demanda (18 Node.js, 5 Java/Kotlin, 3 React y 4 de datos; 21 con PostgreSQL) es una línea base supuesta que se valida en las dos primeras semanas.</li>
+    <li>La plataforma corre sobre Kubernetes con Git, Argo CD y Crossplane, como en el material de la sesión. Si el stack cambia, el principio de separar planos se mantiene.</li>
+    <li>Hay presupuesto para contratar un PPM si no se encuentra el perfil entre los equipos consumidores.</li>
+    <li>Los dos equipos que usan Jenkins son de Java/Kotlin y no tienen restricciones regulatorias que impidan migrar.</li>
+  </ul>
+  </details>
+  <div class="callout g"><h3>Acuerdo propuesto</h3><p>Nombrar la dupla PPM–TL esta semana, publicar la política de rutas propias, congelar Jenkins e iniciar la separación de planos. El comité revisará en la semana 13 la evidencia de adopción, el game day y la capacidad liberada para definir los golden paths del siguiente trimestre.</p></div>
+  <details class="equipo-details"><summary>Referencias y fundamento conceptual</summary><p>Universidad de los Andes. <i>Hoja de trabajo No. 11, ARTI-4219 Arquitectura de Plataformas, 2026-20</i>. Contexto y requisitos del caso LogisTech.</p><p>Material del curso. <i>S13 – Modelo Operativo</i>. Plataforma como producto, Two-in-a-Box, curación 80/20, plataforma fuera de la ruta crítica, adopción pull, InnerSourcing, deuda técnica y modelo de madurez.</p><p>Fournier, C. y Nowland, I. (2024). <i>Platform Engineering: A guide for Technical, Product and People Leaders</i>. O'Reilly Media.</p><p>Körbächer, M., Grabner, A. y Lipsig, H. (2024). <i>Platform Engineering for Architects</i>. Packt Publishing.</p><p>Cloud Native Computing Foundation. <i>Platform Engineering Maturity Model</i>.</p><p>Skelton, M. y Pais, M. (2019). <i>Team Topologies</i>. IT Revolution.</p></details>
+</section>
+
+</main>
+
+<footer class="container" style="margin:0 auto;padding-block:2rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:relative;z-index:1">
+  <span>ARTI-4219 · Arquitectura de Plataformas · Uniandes</span>
+  <span>Hoja de trabajo 11 · LogisTech · 2026-20</span>
+</footer>
+
+<script>
+/* ---------- Síntesis, detalle y enlaces directos ---------- */
+(function(){
+  const details = [...document.querySelectorAll('main details')];
+  const toggle = document.getElementById('reading-toggle');
+  const status = document.getElementById('reading-status');
+  function sync(){
+    const allOpen = details.every(d => d.open), someOpen = details.some(d => d.open);
+    toggle.textContent = allOpen ? 'Volver a síntesis' : 'Mostrar análisis completo';
+    toggle.setAttribute('aria-expanded', String(allOpen));
+    status.textContent = allOpen ? 'Análisis completo · Todos los apartados están abiertos.' :
+      someOpen ? 'Vista de síntesis · Algunos apartados están abiertos.' :
+      'Vista de síntesis · Despliega cada apartado para consultar su fundamento.';
+  }
+  toggle.closest('.reading-controls').hidden = false;
+  toggle.addEventListener('click', () => { const open = !details.every(d => d.open); details.forEach(d => { d.open = open; }); sync(); });
+  details.forEach(d => d.addEventListener('toggle', sync));
+  function revealAnchor(){
+    let id; try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    const target = id && document.getElementById(id); if(!target) return;
+    let anc = target.closest('details'); if(!anc) return;
+    while(anc){ anc.open = true; anc = anc.parentElement.closest('details'); }
+    requestAnimationFrame(() => target.scrollIntoView({block:'start'}));
+  }
+  addEventListener('hashchange', revealAnchor); revealAnchor();
+  let before = null;
+  addEventListener('beforeprint', () => { if(before === null) before = details.map(d => d.open); details.forEach(d => { d.open = true; }); });
+  addEventListener('afterprint', () => { if(before === null) return; details.forEach((d, i) => { d.open = before[i]; }); before = null; sync(); });
+  sync();
+})();
+
+/* ---------- Fondo: carriles con marcas viales (estático) ---------- */
+(function(){
+  const c = document.getElementById('bg'), x = c.getContext('2d');
+  function draw(){
+    const W = c.width = innerWidth, H = c.height = innerHeight;
+    x.clearRect(0, 0, W, H);
+    const n = Math.max(5, Math.round(H / 130)), lane = H / n;
+    for(let i = 0; i < n; i++){
+      const y = (i + .5) * lane;
+      x.strokeStyle = 'rgba(31,35,40,.035)'; x.lineWidth = 1; x.setLineDash([]);
+      x.beginPath(); x.moveTo(0, y); x.lineTo(W, y); x.stroke();
+      x.strokeStyle = i % 3 === 1 ? 'rgba(176,122,22,.07)' : 'rgba(31,35,40,.03)';
+      x.lineWidth = 2; x.setLineDash([18, 22]); x.lineDashOffset = (i * 13) % 40;
+      x.beginPath(); x.moveTo(0, y + lane / 2); x.lineTo(W, y + lane / 2); x.stroke();
+    }
+  }
+  addEventListener('resize', draw); draw();
+})();
+
+/* ---------- Barra de progreso ---------- */
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('bar').style.width = Math.min(100, h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+}, {passive: true});
+</script>
+<script>
+/* ---------- Simulador de portada: plataforma fuera de la ruta crítica ---------- */
+(function(){
+  const $ = id => document.getElementById(id);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? Math.min(ms, 120) : ms));
+  const pkt = $('pkt'), pktTxt = $('pktTxt'), hint = $('simHint');
+  const steps = [...document.querySelectorAll('#simSteps li')];
+  const N = {portal:$('n-portal'), api:$('n-api'), repo:$('n-repo'), ci:$('n-ci'), reg:$('n-reg'), prod:$('n-prod'), data:$('n-data')};
+  const R = {repo:$('rRepo'), ci:$('rCi'), reg:$('rReg'), data:$('rData')};
+  const lk = [$('lkPortal'), $('lkApi')];
+  let busy = false, deploys = 0, during = 0, version = 3;
+
+  const show = (el, on) => { el.style.transition = 'opacity .25s'; el.style.opacity = on ? 1 : 0; };
+  const place = (x, y) => pkt.setAttribute('transform', `translate(${x} ${y})`);
+  const say = t => { hint.textContent = t; };
+  function focus(k){ ['repo','ci','reg','prod','data'].forEach(n => N[n].classList.remove('on')); if(k) N[k].classList.add('on'); }
+  function mark(i){ steps.forEach((s, k) => { s.className = k < i ? 'done' : k === i ? 'cur' : ''; }); }
+  function counters(){ $('cntText').textContent = `despliegues: ${deploys} · durante la caída: ${during}`; }
+  function outage(on){
+    [N.portal, N.api].forEach(n => n.classList.toggle('bad', on));
+    lk.forEach(l => l.classList.toggle('off', on));
+    $('portalSt').textContent = on ? 'fuera de servicio' : 'catálogo y templates';
+    $('apiSt').textContent = on ? 'fuera de servicio' : 'escribe PR en Git';
+    show($('downText'), on); show($('downText2'), on);
+  }
+  function reset(){
+    Object.values(N).forEach(n => n.classList.remove('on','ok'));
+    Object.values(R).forEach(r => r.classList.remove('on','gold'));
+    pkt.classList.remove('gold'); show(pkt, false); steps.forEach(s => s.className = '');
+    $('ciSt').textContent = 'firma la imagen';
+  }
+  function travel(path, ms = 560){ return new Promise(res => {
+    const L = path.getTotalLength(), d = reduce ? 0 : ms, t0 = performance.now();
+    (function f(now){
+      const p = d ? Math.min(1, (now - t0) / d) : 1, e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+      const pt = path.getPointAtLength(e * L); place(pt.x, pt.y);
+      if(p < 1) requestAnimationFrame(f); else res();
+    })(t0);
+  });}
+
+  async function deliver(down, fromData){
+    const label = fromData ? 'datos' : 'v1.' + (++version) + '.0';
+    pktTxt.textContent = label; show(pkt, true);
+    if(fromData){
+      pkt.classList.add('gold'); place(220, 272); N.data.classList.add('on'); mark(0);
+      say('El equipo de datos opera su propio pipeline fuera del camino pavimentado, sin pedir aprobación.');
+      R.data.classList.add('gold'); await wait(700); await travel(R.data, 700); N.data.classList.remove('on');
+    } else {
+      place(220, 169); focus('repo'); mark(0);
+      say(down ? 'El portal y la API están caídos. El equipo hace push igual: el pipeline vive en su repositorio.'
+               : 'El equipo hace push. El pipeline vive en su repositorio y usa la biblioteca de CI fijada.');
+      R.repo.classList.add('on'); await wait(800); await travel(R.repo); N.repo.classList.add('ok');
+    }
+    focus('ci'); mark(1); await wait(350); mark(2);
+    for(const t of ['pruebas ✓', 'políticas OPA ✓', 'imagen firmada ✓']){ $('ciSt').textContent = t; await wait(330); }
+    say(fromData ? 'Los cuatro mínimos se verifican como en cualquier ruta: identidad, firma, telemetría y datos.'
+                 : 'Pruebas, políticas y firma corren dentro del pipeline, sin consultar a la plataforma.');
+    N.ci.classList.add('ok'); place(470, 169); R.ci.classList.add('on'); await travel(R.ci);
+    focus('reg'); mark(3); say('La imagen firmada se publica en el registro replicado y el pipeline abre el PR de versión en Git.');
+    await wait(800); N.reg.classList.add('ok'); place(720, 169); R.reg.classList.add('on'); await travel(R.reg);
+    focus('prod'); mark(4);
+    say('Argo CD, dentro del clúster, sincroniza desde Git y la admisión verifica la firma localmente.');
+    await wait(900); N.prod.classList.add('ok'); show(pkt, false); focus(null);
+    deploys++; if(down) during++; counters(); steps.forEach(s => s.className = 'done');
+    say(down ? 'Desplegado sin portal ni API. La caída solo retrasa la creación de servicios nuevos.'
+             : fromData ? 'Ruta propia visible y operada por su equipo: sin shadow IT y sin castigo.'
+             : 'Desplegado. El portal solo registró el resultado en el catálogo.');
+  }
+  async function run(fn){ if(busy) return; busy = true; try { await fn(); } finally { busy = false; } }
+  const pathFlow = async () => { reset(); outage(false); await deliver(false, false); };
+  const downFlow = async () => { reset(); outage(true); await wait(900); await deliver(true, false); };
+  const dataFlow = async () => { reset(); outage(false); await deliver(false, true); };
+  $('simPath').onclick = () => run(pathFlow);
+  $('simDown').onclick = () => run(downFlow);
+  $('simData').onclick = () => run(dataFlow);
+  setTimeout(() => run(async () => { await pathFlow(); await wait(1800); await downFlow(); }), 700);
+})();
+</script>
+<script>
+/* ---------- Visor de diagramas: zoom y arrastre ---------- */
+document.querySelectorAll('.diagram-viewer').forEach(function(viewer){
+  var stage = viewer.querySelector('.diagram-viewer-stage'), img = stage.querySelector('svg');
+  var vb = img.viewBox.baseVal, natW = vb.width, natH = vb.height, scale = 1, tx = 0, ty = 0;
+  function render(){ img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')'; }
+  function fit(){ var r = stage.getBoundingClientRect(); scale = Math.min(r.width / natW, r.height / natH); tx = (r.width - natW * scale) / 2; ty = (r.height - natH * scale) / 2; render(); }
+  function zoomAt(cx, cy, f){ var r = stage.getBoundingClientRect(), x = cx - r.left, y = cy - r.top, ns = Math.max(.1, Math.min(8, scale * f)); tx = x - (x - tx) * (ns / scale); ty = y - (y - ty) * (ns / scale); scale = ns; render(); }
+  function center(f){ var r = stage.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, f); }
+  viewer.querySelector('[data-zoom="in"]').onclick = function(){ center(1.2); };
+  viewer.querySelector('[data-zoom="out"]').onclick = function(){ center(.83); };
+  viewer.querySelector('[data-zoom="fit"]').onclick = fit;
+  stage.addEventListener('wheel', function(e){ if(!e.ctrlKey && !e.metaKey) return; e.preventDefault(); zoomAt(e.clientX, e.clientY, e.deltaY > 0 ? .9 : 1.11); }, {passive:false});
+  stage.addEventListener('dblclick', function(e){ zoomAt(e.clientX, e.clientY, 1.5); });
+  var drag = null;
+  stage.addEventListener('pointerdown', function(e){ if(e.pointerType === 'touch' && scale <= 1.01) return; drag = {x:e.clientX, y:e.clientY}; stage.classList.add('grabbing'); stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', function(e){ if(!drag) return; tx += e.clientX - drag.x; ty += e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY; render(); });
+  stage.addEventListener('pointerup', function(){ drag = null; stage.classList.remove('grabbing'); });
+  addEventListener('resize', fit); fit();
+});
+</script>
+</body>
+</html>
